@@ -27,6 +27,7 @@ This feature will be used by clinicians or by the ops team to schedule appointme
 
 ### Activate shell
 - To activate shell run `poetry shell`
+- Run `poetry run server` from the command line to start the server.
 
 ## Bonus (not necessary)
 Write 1-2 unit tests using pytest for the endpoint using mock for external API.
