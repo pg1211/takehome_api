@@ -15,6 +15,9 @@ flask-cors = "^5.0.1"
 [tool.poetry.scripts]
 server = "scripts:server"
 
+[tool.poetry.group.dev.dependencies]
+sqlalchemy-stubs = "^0.4"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
