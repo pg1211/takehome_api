@@ -50,7 +50,7 @@ This feature will be used by clinicians or by the ops team to schedule appointme
 - Fork this github repository and check in your code.
 - Create a new branch with your name and start working on the assignment.
 - Once you are done, push your changes to your forked repository and share the link with me.
-- Please include a screen recording or any documentation of the functionality in your README file.
+- Please include any documentation of your implementation in your README file.
 
 
 ## Getting started
