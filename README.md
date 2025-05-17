@@ -1,5 +1,5 @@
 # Take home assignment
-You’re building a simplified version of a virtual dermatology clinic. Patients can book appointments, and the system should assign them to a provider.
+You’re building a simplified version of a virtual dermatology clinic. Patients can book appointments, and the system should assign them to the right provider.
 
 ## Goal
 
@@ -24,7 +24,7 @@ Assign the patient to a provider that:
 
 **This step will need some schema design work** 
   - I have provided a basic schema for you to start with. You can modify it as needed.
-  - (hint: You can create new tables - ProviderState and ProviderInsurance or use the Provider table to store the related information and use it to filter the providers and match them with the patients)
+  - (hint: You can create new tables—ProviderState and ProviderInsurance or use the Provider table to store the related information and use it to filter and match them with the patients)
 
 ### 3. **Scheduling Simulation**
 Call a mocked external service to simulate appointment scheduling.
@@ -33,6 +33,8 @@ Call a mocked external service to simulate appointment scheduling.
 ### 4. **Output**
 ```json
 {
+  "patient": "John Doe",
+  "scheduled": true,
   "appointment_id": "apt_1234",
   "provider": "Dr. Jane Doe",
   "time": "2023-10-01T10:00:00Z"
