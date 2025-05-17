@@ -20,9 +20,6 @@ def create_app(config_name):
         return str(Response.default_status) + " OK"
 
     # TODO:
-    # Ability to add a patient
-    # Ability to add an appointment
-
-
+    # Add an appointment endpoint
 
     return app
