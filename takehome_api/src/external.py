@@ -3,9 +3,12 @@
 # In a real-world scenario, this would involve making HTTP requests to the actual API.
 # If you want to use a real 3rd party API, please feel free to try.
 
-def get_available_provider(preferred_time):
+def schedule_with_provider(provider_name, patient_name):
     return {
-        "provider_id": 101,
-        "provider_name": "Dr. Smith",
-        "confirmed_time": preferred_time
+        "scheduled": True,
+        "appointment_id": "12345",
+        "provider": provider_name,
+        "time": "2023-10-01T10:00:00Z",
+        "patient": patient_name,
     }
+
