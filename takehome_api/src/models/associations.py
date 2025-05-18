@@ -18,10 +18,18 @@ provider_insurances = db.Table(
     db.Column("insurance", db.String(100), db.ForeignKey("insurance.name"), primary_key=True),
 )
 
+
 class State(db.Model):
     __tablename__ = 'state'
     code = db.Column(db.String(2), primary_key=True)
 
+    def __init__(self, code):
+        self.code = code
+
+
 class Insurance(db.Model):
     __tablename__ = 'insurance'
     name = db.Column(db.String(100), primary_key=True)
+
+    def __init__(self, name):
+        self.name = name
