@@ -1,15 +1,14 @@
 from dotenv import load_dotenv
-
-load_dotenv(verbose=True)
-from flask import Flask, Response, request, jsonify
+from flask import Flask, Response
 from flask_cors import CORS
 from instance.config import APP_CONFIG
 from takehome_api.src.database import db
+# handling functions
+from takehome_api.src.handlers.book_appointment import book_appointment
+from takehome_api.src.handlers.list_appointments import list_appointments
 
-from takehome_api.src.models.Provider import Provider
-from takehome_api.src.models.Patient import Patient
-from takehome_api.src.models.Appointment import Appointment
-from takehome_api.src.external import schedule_with_provider
+load_dotenv(verbose=True)
+
 
 def create_app(config_name):
     app = Flask(__name__)
@@ -26,5 +25,17 @@ def create_app(config_name):
 
     # TODO:
     # Add an appointment endpoint
+    @app.route("/appointment", methods=["POST"])
+    def appointment_route():
+        return book_appointment()
+
+    # for viewing appointments in the future
+    @app.route("/appointments", methods=["GET"])
+    def appointments_route():
+        return list_appointments()
+
+    @app.route("/providers", methods=["POST"])
+    def providers_route():
+        return str(Response.default_status) + " OK"
 
     return app
