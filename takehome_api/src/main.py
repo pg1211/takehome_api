@@ -37,7 +37,7 @@ def create_app(config_name):
         return list_appointments()
 
     # for adding providers
-    @app.route("/provider", methods=["GET"])
+    @app.route("/provider", methods=["POST"])
     def provider_route():
         return add_provider()
 

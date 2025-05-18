@@ -11,8 +11,8 @@ def add_provider():
     insurances = provider_data.get("insurances")
 
     # Validate input
-    if not all([name, states, insurances]):
-        return jsonify({"error": "Missing patient information"}), 400
+    if not all([name]):
+        return jsonify({"error": "Missing provider information"}), 400
 
     provider = Provider(name=name)
     db.session.add(provider)
