@@ -1,6 +1,5 @@
 from takehome_api.src.database import db
 from takehome_api.src.models.associations import provider_states, provider_insurances
-
 # from takehome_api.src.models.associations import State, Insurance
 
 
