@@ -8,6 +8,8 @@ from takehome_api.src.handlers.book_appointment import book_appointment
 from takehome_api.src.handlers.list_appointments import list_appointments
 from takehome_api.src.handlers.list_providers import list_providers
 from takehome_api.src.handlers.add_provider import add_provider
+from takehome_api.src.handlers.clear_db import clear_db
+
 
 load_dotenv(verbose=True)
 
@@ -48,11 +50,8 @@ def create_app(config_name):
 
     # for clearing existing db data
     @app.route("/clear")
-    def clear():
-        meta = db.metadata
-        for table in reversed(meta.sorted_tables):
-            db.session.execute(table.delete())
-        db.session.commit()
+    def clear_route():
+        clear_db()
         return {'status': 'success', 'message': 'All data cleared '}, 200
 
     return app
