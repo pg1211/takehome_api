@@ -6,6 +6,8 @@ from takehome_api.src.database import db
 # handling functions
 from takehome_api.src.handlers.book_appointment import book_appointment
 from takehome_api.src.handlers.list_appointments import list_appointments
+from takehome_api.src.handlers.list_providers import list_providers
+from takehome_api.src.handlers.add_provider import add_provider
 
 load_dotenv(verbose=True)
 
@@ -34,8 +36,23 @@ def create_app(config_name):
     def appointments_route():
         return list_appointments()
 
-    @app.route("/providers", methods=["POST"])
+    # for adding providers
+    @app.route("/provider", methods=["GET"])
+    def provider_route():
+        return add_provider()
+
+    # for viewing providers
+    @app.route("/providers", methods=["GET"])
     def providers_route():
-        return str(Response.default_status) + " OK"
+        return list_providers()
+
+    # for clearing existing db data
+    @app.route("/clear")
+    def clear():
+        meta = db.metadata
+        for table in reversed(meta.sorted_tables):
+            db.session.execute(table.delete())
+        db.session.commit()
+        return {'status': 'success', 'message': 'All data cleared '}, 200
 
     return app
