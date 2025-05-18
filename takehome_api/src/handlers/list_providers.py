@@ -9,7 +9,7 @@ def list_providers():
             {
                 "id": p.id,
                 "name": p.name,
-                "states": [state.name for state in p.states],
+                "states": [state.code for state in p.states],
                 "insurances": [ins.name for ins in p.insurances],
             }
             for p in providers

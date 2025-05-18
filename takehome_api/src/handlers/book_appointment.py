@@ -19,20 +19,16 @@ def book_appointment():
         return jsonify({"error": "Missing patient information"}), 400
 
     # Find a provider licensed in the state and accepting the insurance
-    # provider = Provider.query \
-    #     .join(Provider.states) \
-    #     .join(Provider.insurances) \
-    #     .filter_by(code=state) \
-    #     .filter(Provider.insurances.any(name=insurance)) \
-    #     .first()
-
-    provider = Provider("Aastha Gautam")  # hardcoded provider name
+    provider = (
+        Provider.query.filter(Provider.states.any(code=state))
+        .filter(Provider.insurances.any(name=insurance))
+        .first()
+    )
 
     if not provider:
         return jsonify({"error": "No matching provider found"}), 404
 
     # Simulate scheduling
-    # scheduling_result = schedule_with_provider(provider.name, name)
     scheduling_result = schedule_with_provider(provider, name)
 
     # Optionally, save patient and appointment to DB

@@ -8,7 +8,10 @@ class Provider(db.Model):
     name = db.Column(db.String(100), nullable=False)
     # add additional fields as needed
     states = db.relationship(
-        "State", secondary=provider_states, backref="licensed_providers", lazy="dynamic"
+        "State",
+        secondary=provider_states,
+        backref="licensed_providers",
+        lazy="dynamic"
     )
 
     insurances = db.relationship(
