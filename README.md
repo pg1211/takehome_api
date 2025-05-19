@@ -77,6 +77,7 @@ When booking an appointment, there are three potential responses:
 
 ## Notes
 
+- I added `flake8` for linting and am using `black` for formatting
 - The provider matching logic assigns a patient to a provider licensed in the patient's state and accepting their insurance.
 - The `/clear` endpoint is useful for resetting the database during development and testing.
 
