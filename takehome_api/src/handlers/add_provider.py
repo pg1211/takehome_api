@@ -4,6 +4,7 @@ from takehome_api.src.models.associations import State, Insurance
 from takehome_api.src.database import db
 
 
+# add a new provider with associated states and insurances
 def add_provider():
     data = request.get_json()
     provider_data = data.get("provider", {})
@@ -41,13 +42,9 @@ def add_provider():
     db.session.add(provider)
     db.session.commit()
 
-    return (
-        jsonify(
-            {
-                "name": provider_name,
-                "states": [s.code for s in state_objs],
-                "insurances": [i.name for i in insurance_objs],
-            }
-        ),
-        201,
-    )
+    response = {
+        "name": provider_name,
+        "states": [s.code for s in state_objs],
+        "insurances": [i.name for i in insurance_objs],
+    }
+    return jsonify(response), 201

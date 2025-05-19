@@ -6,8 +6,9 @@ from takehome_api.src.models.Appointment import Appointment
 from takehome_api.src.database import db
 
 
+# book an appointment for a patient if there is a matching provider
 def book_appointment():
-    data = request.get_json()
+    data = request.get_json() or {}
     patient_data = data.get("patient", {})
     name = patient_data.get("name")
     email = patient_data.get("email")
@@ -24,7 +25,6 @@ def book_appointment():
         .filter(Provider.insurances.any(name=insurance))
         .first()
     )
-
     if not provider:
         return jsonify({"error": "No matching provider found"}), 404
 
@@ -47,15 +47,11 @@ def book_appointment():
     db.session.commit()
 
     # return response
-    return (
-        jsonify(
-            {
-                "patient": name,
-                "scheduled": scheduling_result["scheduled"],
-                "appointment_id": scheduling_result["appointment_id"],
-                "provider": provider.name,
-                "time": scheduling_result["time"],
-            }
-        ),
-        201,
-    )
+    response = {
+        "patient": name,
+        "scheduled": scheduling_result["scheduled"],
+        "appointment_id": scheduling_result["appointment_id"],
+        "provider": provider.name,
+        "time": scheduling_result["time"],
+    }
+    return jsonify(response), 201
