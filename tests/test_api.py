@@ -9,7 +9,6 @@ class APITestCase(unittest.TestCase):
         self.client = self.app.test_client()
         with self.app.app_context():
             db.create_all()
-            # Optionally, seed the database with states/insurances
 
     def tearDown(self):
         with self.app.app_context():
@@ -33,7 +32,7 @@ class APITestCase(unittest.TestCase):
         self.assertIn("name", resp.get_json())
 
     def test_book_appointment_success(self):
-        # Add provider first
+        # add provider first
         self.client.post("/provider", json={
             "provider": {
                 "name": "Dr. Jane Doe",
@@ -41,7 +40,7 @@ class APITestCase(unittest.TestCase):
                 "insurances": ["Aetna"]
             }
         })
-        # Book appointment
+        # book appointment
         resp = self.client.post("/appointment", json={
             "patient": {
                 "name": "John Doe",

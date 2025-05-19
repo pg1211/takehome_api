@@ -14,11 +14,11 @@ def book_appointment():
     state = patient_data.get("state")
     insurance = patient_data.get("insurance")
 
-    # Validate input
+    # validate input
     if not all([name, email, state, insurance]):
         return jsonify({"error": "Missing patient information"}), 400
 
-    # Find a provider licensed in the state and accepting the insurance
+    # find a provider licensed in the state and accepting the insurance
     provider = (
         Provider.query.filter(Provider.states.any(code=state))
         .filter(Provider.insurances.any(name=insurance))
@@ -28,10 +28,10 @@ def book_appointment():
     if not provider:
         return jsonify({"error": "No matching provider found"}), 404
 
-    # Simulate scheduling
+    # simulate scheduling
     scheduling_result = schedule_with_provider(provider, name)
 
-    # Optionally, save patient and appointment to DB
+    # add patient and appt to db
     patient = Patient(name=name, email=email, state=state, insurance=insurance)
     db.session.add(patient)
     db.session.commit()
@@ -46,7 +46,7 @@ def book_appointment():
     db.session.add(appointment)
     db.session.commit()
 
-    # Return response
+    # return response
     return (
         jsonify(
             {
