@@ -1,5 +1,6 @@
 from takehome_api.src.database import db
 from takehome_api.src.models.associations import provider_states, provider_insurances
+
 # from takehome_api.src.models.associations import State, Insurance
 
 
@@ -8,10 +9,7 @@ class Provider(db.Model):
     name = db.Column(db.String(100), nullable=False)
     # add additional fields as needed
     states = db.relationship(
-        "State",
-        secondary=provider_states,
-        backref="licensed_providers",
-        lazy="dynamic"
+        "State", secondary=provider_states, backref="licensed_providers", lazy="dynamic"
     )
 
     insurances = db.relationship(

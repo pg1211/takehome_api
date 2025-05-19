@@ -24,7 +24,7 @@ class APITestCase(unittest.TestCase):
             "provider": {
                 "name": "Dr. Jane Doe",
                 "states": ["CA", "NY"],
-                "insurances": ["Aetna", "Blue Cross"]
+                "insurances": ["Aetna", "Blue Cross"],
             }
         }
         resp = self.client.post("/provider", json=data)
@@ -33,34 +33,43 @@ class APITestCase(unittest.TestCase):
 
     def test_book_appointment_success(self):
         # add provider first
-        self.client.post("/provider", json={
-            "provider": {
-                "name": "Dr. Jane Doe",
-                "states": ["CA"],
-                "insurances": ["Aetna"]
-            }
-        })
+        self.client.post(
+            "/provider",
+            json={
+                "provider": {
+                    "name": "Dr. Jane Doe",
+                    "states": ["CA"],
+                    "insurances": ["Aetna"],
+                }
+            },
+        )
         # book appointment
-        resp = self.client.post("/appointment", json={
-            "patient": {
-                "name": "John Doe",
-                "email": "john@example.com",
-                "state": "CA",
-                "insurance": "Aetna"
-            }
-        })
+        resp = self.client.post(
+            "/appointment",
+            json={
+                "patient": {
+                    "name": "John Doe",
+                    "email": "john@example.com",
+                    "state": "CA",
+                    "insurance": "Aetna",
+                }
+            },
+        )
         self.assertEqual(resp.status_code, 201)
         self.assertTrue(resp.get_json()["scheduled"])
 
     def test_book_appointment_no_provider(self):
-        resp = self.client.post("/appointment", json={
-            "patient": {
-                "name": "John Doe",
-                "email": "john@example.com",
-                "state": "TX",
-                "insurance": "Nonexistent"
-            }
-        })
+        resp = self.client.post(
+            "/appointment",
+            json={
+                "patient": {
+                    "name": "John Doe",
+                    "email": "john@example.com",
+                    "state": "TX",
+                    "insurance": "Nonexistent",
+                }
+            },
+        )
         self.assertEqual(resp.status_code, 404)
 
     def test_clear_db(self):

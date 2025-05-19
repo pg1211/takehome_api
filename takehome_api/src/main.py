@@ -3,6 +3,7 @@ from flask import Flask, Response
 from flask_cors import CORS
 from instance.config import APP_CONFIG
 from takehome_api.src.database import db
+
 # handling functions
 from takehome_api.src.handlers.book_appointment import book_appointment
 from takehome_api.src.handlers.list_appointments import list_appointments
@@ -52,6 +53,6 @@ def create_app(config_name):
     @app.route("/clear")
     def clear_route():
         clear_db()
-        return {'status': 'success', 'message': 'All data cleared '}, 200
+        return {"status": "success", "message": "All data cleared "}, 200
 
     return app
